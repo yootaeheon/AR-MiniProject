@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8340125347802683509
+--- !u!1 &7882412934729015646
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8716087593213805263}
-  - component: {fileID: 5717910066959338858}
-  - component: {fileID: 7547733499561458080}
+  - component: {fileID: 7361173593084394468}
+  - component: {fileID: 5874945666656564289}
+  - component: {fileID: 8530671727378169995}
   m_Layer: 0
   m_Name: Glasses2
   m_TagString: Untagged
@@ -18,36 +18,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8716087593213805263
+--- !u!4 &7361173593084394468
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8340125347802683509}
-  m_LocalRotation: {x: -0.061092146, y: 0, z: 0, w: 0.9981321}
-  m_LocalPosition: {x: 26.419554, y: 0.22337624, z: 15.24842}
+  m_GameObject: {fileID: 7882412934729015646}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.0005, y: 0, z: 0.0696}
   m_LocalScale: {x: 206, y: 206, z: 206}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 8716087593213805263}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -7.005, y: 0, z: 0}
---- !u!33 &5717910066959338858
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!33 &5874945666656564289
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8340125347802683509}
+  m_GameObject: {fileID: 7882412934729015646}
   m_Mesh: {fileID: 8624476548977350292, guid: 04d63cd58ff1f6c4cb86bd8861ef76c3, type: 3}
---- !u!23 &7547733499561458080
+--- !u!23 &8530671727378169995
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8340125347802683509}
+  m_GameObject: {fileID: 7882412934729015646}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -83,3 +83,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8340125347802683509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8716087593213805263}
+  m_Layer: 0
+  m_Name: Glasses2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8716087593213805263
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8340125347802683509}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1326.511, y: 0, z: -918.711}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 7361173593084394468}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

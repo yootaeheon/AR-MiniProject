@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.XR;
@@ -44,10 +45,19 @@ public class FaceManager : MonoBehaviour
         if (args.added.Count > 0)
         {
             face = args.added[0];
+            FitGlasses(glassesPrefab[0]);
+        }
+        if (args.updated.Count > 0)
+        {
+            face = args.updated[0];
 
             eyePos = face.transform.TransformPoint(face.vertices[6]);
             curGlasses.transform.position = eyePos;
+            curGlasses.transform.rotation = Quaternion.identity;
+            Debug.Log($"{eyePos}, {Quaternion.identity}");
+            
         }
+        //remove
     }
 
     private void FitGlasses(GameObject glassesPrefab)
@@ -57,9 +67,9 @@ public class FaceManager : MonoBehaviour
             Destroy(curGlasses);
         }
         curGlasses = Instantiate(glassesPrefab, face.transform);
-        curGlasses.transform.localPosition = Vector3.zero;
-        curGlasses.transform.localRotation = Quaternion.identity;
+        Debug.Log($"{glassesPrefab}, »ı¼ºµÊ!");
     }
+
     public void SelectGlasses(int index)
     {
         if (index >= 0 && index < glassesPrefab.Length)
