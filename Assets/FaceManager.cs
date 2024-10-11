@@ -1,19 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.XR;
 using UnityEngine.XR.ARFoundation;
 
 public class FaceManager : MonoBehaviour
 {
-    [SerializeField] ARFaceManager faceManager;
-    [SerializeField] GameObject sunGlasses;
-    ARFace face;
-    private GameObject eyeTracker;
+    public static FaceManager Instance { get; private set; }
 
-    private void Awake()
+    public void Awake()
     {
-        eyeTracker = Instantiate(sunGlasses);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
+
+
+    [SerializeField] GameObject[] glassesPrefab;
+    private GameObject curGlasses;
+
+    [SerializeField] ARFaceManager faceManager;
+
+    Vector3 eyePos;
+    ARFace face;
+
     private void OnEnable()
     {
         faceManager.facesChanged += OnFaceChange;
@@ -26,17 +41,30 @@ public class FaceManager : MonoBehaviour
 
     private void OnFaceChange(ARFacesChangedEventArgs args)
     {
-        if (args.updated.Count > 0)
+        if (args.added.Count > 0)
         {
-            face = args.updated[0];
+            face = args.added[0];
 
-            Vector3 eyePos = face.transform.TransformPoint(face.vertices[6]);
-            eyeTracker.transform.position = eyePos;
+            eyePos = face.transform.TransformPoint(face.vertices[6]);
+            curGlasses.transform.position = eyePos;
         }
     }
 
-    public void ChaneMaterial(Material material)
+    private void FitGlasses(GameObject glassesPrefab)
     {
-        face.GetComponent<Renderer>().material = material; //안경을 material로 가능한가?
+        if (curGlasses != null)
+        {
+            Destroy(curGlasses);
+        }
+        curGlasses = Instantiate(glassesPrefab, face.transform);
+        curGlasses.transform.localPosition = Vector3.zero;
+        curGlasses.transform.localRotation = Quaternion.identity;
+    }
+    public void SelectGlasses(int index)
+    {
+        if (index >= 0 && index < glassesPrefab.Length)
+        {
+            FitGlasses(glassesPrefab[index]);
+        }
     }
 }
