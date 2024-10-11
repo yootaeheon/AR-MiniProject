@@ -6,24 +6,8 @@ using UnityEngine.XR.ARFoundation;
 
 public class FaceManager : MonoBehaviour
 {
-    public static FaceManager Instance { get; private set; }
-
-    public void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-
-    [SerializeField] GameObject[] glassesPrefab;
-    private GameObject curGlasses;
+    [SerializeField] GameObject[] glassesPrefab;  // 안경 프리팹을 담을 배열 생성
+    private GameObject curGlasses;                // 현재 안경
 
     [SerializeField] ARFaceManager faceManager;
 
@@ -32,7 +16,7 @@ public class FaceManager : MonoBehaviour
 
     private void OnEnable()
     {
-        faceManager.facesChanged += OnFaceChange;
+        faceManager.facesChanged += OnFaceChange;  
     }
 
     private void OnDisable()
@@ -42,35 +26,31 @@ public class FaceManager : MonoBehaviour
 
     private void OnFaceChange(ARFacesChangedEventArgs args)
     {
-        if (args.added.Count > 0)
+        if (args.added.Count > 0)  // 처음 얼굴을 인식 하였을 때
         {
             face = args.added[0];
-            FitGlasses(glassesPrefab[0]);
+            FitGlasses(glassesPrefab[0]);  // 0번째 안경을 기본 안경으로 생성
         }
         if (args.updated.Count > 0)
         {
-            face = args.updated[0];
+            face = args.updated[0];  
 
-            eyePos = face.transform.TransformPoint(face.vertices[6]);
-            curGlasses.transform.position = eyePos;
-            curGlasses.transform.rotation = Quaternion.identity;
-            Debug.Log($"{eyePos}, {Quaternion.identity}");
-            
+            eyePos = face.transform.TransformPoint(face.vertices[6]);  // face tracking 정점에 6번(미간 살짝 아래)에 안경 프리팹을 생성
+            curGlasses.transform.position = eyePos;                    // 계속 얼굴을 인식하며 안경을 얼굴에 맞게 위치와 회전을 Update
+            curGlasses.transform.rotation = face.transform.rotation;
         }
-        //remove
     }
 
     private void FitGlasses(GameObject glassesPrefab)
     {
-        if (curGlasses != null)
+        if (curGlasses != null)  // 이미 착용한 안경이 있을 시 파괴하고 새로운 안경 생성
         {
             Destroy(curGlasses);
         }
         curGlasses = Instantiate(glassesPrefab, face.transform);
-        Debug.Log($"{glassesPrefab}, 생성됨!");
     }
 
-    public void SelectGlasses(int index)
+    public void SelectGlasses(int index)  // UI버튼으로 index를 선택하여 원하는 안경 선택하여 피팅
     {
         if (index >= 0 && index < glassesPrefab.Length)
         {
